@@ -20,7 +20,7 @@ app = Flask(__name__)
 # ==========================================
 basedir = os.path.abspath(os.path.dirname(__file__))
 # PostgreSQL 연결 설정
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1234@localhost:5432/collabalyze'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
@@ -628,5 +628,4 @@ def get_project_contributions(project_id):
     })
 
 if __name__ == '__main__':
-    # 개발 모드로 서버 실행
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
