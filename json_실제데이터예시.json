@@ -1,0 +1,96 @@
+{
+  "project_name": "dbader/schedule",
+  "status": "success",
+  "total_contributors": 55,
+  "data": [
+    {
+      "username": "MartinThoma",
+      "profile_image": "https://avatars.githubusercontent.com/u/1658117?v=4",
+      "1_quantitative_data": {
+        "commits": 2,
+        "pull_requests": 2,
+        "issues": 1,
+        "code_reviews": 2,
+        "loc_added": 465,
+        "loc_deleted": 370
+      },
+      "2_nlp_data": {
+        "commit_messages": [
+          "Add type annotations (#427)\n\n\n\nCo-authored-by: SijmenHuizenga <sijmenhuizenga@gmail.com>",
+          "Reformat code using Black formatter (#432)\n\n\n\nCo-authored-by: sijmenhuizenga <sijmenhuizenga@gmail.com>"
+        ],
+        "pull_requests": [
+          {
+            "title": "Reformat code using Black formatter",
+            "body": "",
+            "comments": [
+              "[coveralls]:\n[![Coverage Status](https://coveralls.io/builds/36965860/badge)](https://coveralls.io/builds/36965860)\n\nCoverage remained the same at 100.0% when pulling **a09382e2f935a762a0b9e30ab6fd1b6394b2f0ca on MartinThoma:autoformatter** into **dc3780b40381e1614cae8e49e781ea0bb6479909 on dbader:master**.",
+              "[SijmenHuizenga]: And can you add yourself to AUTHORS.rst? Thanks!",
+              "[MartinThoma]: @SijmenHuizenga The difference is the only thing that you can configure in black - the line length 😄\n\nI ran it with \"black --line-length 79 .\" which is compatible to PEP8. You might have run just \"black .\" (as in the docs) which by default is a line length of 88 characters. Which line length would you like to have?\n\nI could also add a `pyproject.toml` where the line length is set for black. This way \"black .\" would do the right thing. You just need to decide what \"the right thing\" is 😄",
+              "[SijmenHuizenga]: Thanks for the explanation!\n\nSince we are changing the formatting anyway we might as well go with the default black settings :smile: The 88 character line width seems more in line with the rest of the world.",
+              "[SijmenHuizenga]: One last thing before we merge, can you please remove the commits that were pulled in from master? Some 'merge' commits are fine but now somehow there are all these commits in here that are unrelated and have you as co-author. If you can't figure out how to fix this git magic, don't worry, just let me know and I will fix it.",
+              "[MartinThoma]: I'm sorry, I don't know that. I typically squash before I merge (or amend + force-push on feature branches). If it's not a big deal for you, please go ahead and do it :-)"
+            ]
+          },
+          {
+            "title": "Add type annotations",
+            "body": "",
+            "comments": [
+              "[coveralls]:\n[![Coverage Status](https://coveralls.io/builds/37040027/badge)](https://coveralls.io/builds/37040027)\n\nCoverage decreased (-0.3%) to 99.663% when pulling **c8be4063bf78f715b8b5e3a10b2c9951d0117e92 on MartinThoma:type-annotations** into **32a14006dc3aa875bd37c1aeb65de7b526941961 on dbader:master**.",
+              "[MartinThoma]: There are 4 errors mentioned by mypy where I'm uncertain if they can be ignored:\n\n'''\nschedule/__init__.py:251: error: Item \"function\" of \"Optional[Callable[..., Any]]\" has no attribute \"args\"\nschedule/__init__.py:251: error: Item \"None\" of \"Optional[Callable[..., Any]]\" has no attribute \"args\"\nschedule/__init__.py:252: error: Item \"function\" of \"Optional[Callable[..., Any]]\" has no attribute \"keywords\"\nschedule/__init__.py:252: error: Item \"None\" of \"Optional[Callable[..., Any]]\" has no attribute \"keywords\"\n'''",
+              "[MartinThoma]: Thank you very much for all the support for this PR and work on schedule in general :hugs:",
+              "[Code Review - SijmenHuizenga]: Just out of curiosity, what is the rationale for creating a type alias?",
+              "[Code Review - SijmenHuizenga]: These formatting changes are the result of using Black I guess? I'm not opposed to change the formatting in this pr, it would have been 'cleaner' to do the formatting change in a separate PR but since we are here now let's just continue it. To make the introduction of black complete, let's add it to `requirements-dev.txt` and update [the doc](https://github.com/dbader/schedule/blob/master/docs/development.rst) with a new paragraph on how to use this.",
+              "[Code Review - SijmenHuizenga]: Why do we need this?",
+              "[Code Review - MartinThoma]: I was uncertain if `str` is actually the proper type. Could the tags be also integers? Maybe also tuples?",
+              "[Code Review - MartinThoma]: I am completely with you! Black changes are rather nice to do. I could create a new PR for black. We could merge that one first, I'll re-base this PR and we merge it. What do you think about that?",
+              "[Code Review - MartinThoma]: By adding this, we can run `mypy` instead of `mypy schedule` or `mypy .`. When we run `mypy .`, it also checks the `docs`. For testing, I tried `mypy --strict`. I was tempted to also touch the docs with probably is not what we want - hence this :-)",
+              "[Code Review - SijmenHuizenga]: Sounds good!",
+              "[Code Review - SijmenHuizenga]: See #432 for the formatting pr",
+              "[Code Review - SijmenHuizenga]: Apparently [tags must be hashable](https://github.com/dbader/schedule/blob/32a14006dc3aa875bd37c1aeb65de7b526941961/schedule/__init__.py#L409-L410). I guess we could use [the corresponding type](https://stackoverflow.com/a/38078003/2328729)?",
+              "[Code Review - SijmenHuizenga]: Aaah that's pretty cool! Can we try to add this configuration to the `setup.cfg` file to keep configuration a bit more centralized?",
+              "[Code Review - MartinThoma]: I'm confused now. Which configuration do you want to add to the `setup.cfg`?",
+              "[Code Review - SijmenHuizenga]: Whauw, I totally confused myself here. Nevermind that last commetn.",
+              "[Code Review - MartinThoma]: Nice, I didn't know that existed! I made use of it now.",
+              "[Code Review - MartinThoma]: Removing the default argument changes the behaviour! Before, you could call this function without a scheduler argument (I'm not sure if that was reasonable, though)",
+              "[Code Review - SijmenHuizenga]: You are right, changing this is not good. Will roll this back right away.",
+              "[Code Review - SijmenHuizenga]: Let's undo these removals of `pass` and these formatting changes.",
+              "[Code Review - SijmenHuizenga]: '''suggestion\n    def every(self, interval: int = 1) -> Job:\n'''",
+              "[Code Review - SijmenHuizenga]: '''suggestion\n    def _run_job(self, job: Job) -> None:\n'''",
+              "[Code Review - SijmenHuizenga]: add explicit type to `interval`",
+              "[Code Review - MartinThoma]: This will only work with `from __future__ import annotations` as the class Job is not defined at this point. In Python < 3.8 the annotation is actually evaluated when the signature is parsed. Meaning the class \"Job\" would have to exist. Or we import the future annotations ... but that will also only do the trick for Python 3.7. There is no way around the quotes for Python 3.6",
+              "[Code Review - MartinThoma]: Same comment as above",
+              "[Code Review - MartinThoma]: Done! I made it an int :-)",
+              "[Code Review - MartinThoma]: I undid it. However, I want to point out that the \"pass\" has absolutely no effect here. It's like a comment. Pass only is necessary if nothing follows, e.g. if the docstring wasn't there."
+            ]
+          }
+        ],
+        "issues": [
+          {
+            "title": "Type annotations",
+            "body": "Are there plans to add type annotations or stub files for mypy?\n\nI've written an [article about type annotations](https://medium.com/analytics-vidhya/type-annotations-in-python-3-8-3b401384403d) if you need one :-)\n\nA related topic is the Python 2.7 support. Stub files can be added without affecting any runtime, but they are harder to maintain (as they are extra files - I'm not sure how often `schedule` is refactored / new functionality is added).\n\nHaving Python 3.6+ would allow schedule to use a [very nice annotation syntax](https://docs.python.org/3/whatsnew/3.6.html#whatsnew36-pep526). Generally speaking, this type of type annotations makes code way easier to read.",
+            "comments": [
+              "[SijmenHuizenga]: Yes! After we drop python 2.7 support (see #409) we can do this!",
+              "[SijmenHuizenga]: Python 2.7 has been dropped! Is anyone willing to implement this and create a pr?",
+              "We can add the type hints to the main source file itself. Let's focus on the library code first, adding types to the testing code is optional",
+              "[MartinThoma]: Nice!",
+              "[MartinThoma]: I can add a first WIP-PR this evening. The lowest supported Python version now is 3.6, right?",
+              "[SijmenHuizenga]: Awesome!! Yes, 3.6 is the lowest supported version for this library.",
+              "[MartinThoma]: Would adding https://pypi.org/project/typing-extensions/ for Python 3.6 and 3.7 for having [Literal](https://www.python.org/dev/peps/pep-0586/) be acceptable?",
+              "[MartinThoma]: Other question: I've just noticed that schedule does not use [`black`](https://pypi.org/project/black/). Do you use another autoformatter?",
+              "[SijmenHuizenga]: Let's start of without adding typing-extensions. One of the cool things of this library is it's lack of dependencies, if we can I would like to keep it that way.",
+              "Formatter is flake8.",
+              "[MartinThoma]: > Let's start of without adding typing-extensions\n\nOk :ok_hand:\n\n> Formatter is flake8.\n\nI only know how to use flake8 as a linter (complaining about formatting), not how to use it as a formatter (fixing formatting)",
+              "[SijmenHuizenga]: ah yes, I have no idea how to do auto-formatting using flake8, I just manually fix the errors :laughing: Never took the time to figure that out. If you do, sharing would be much appreciated :heart:",
+              "[MartinThoma]: In this case I can warmly recommend using black :-)\n\nI grew into liking black because it does NOT allow customization. Code formatted by black always looks the same. As you cannot customize it, you don’t need to discuss it. It just solves the issue of conflicting styles and arguments around it. Black is maintained by the Python Software Foundation and likely the most commonly adopted auto formatter for Python.\n\nBlack is compatible with PEP8 and a typical set of Flake8 (IIRC, Flake8 has some conflicting rules, depending on what you use ... and, of course, lots of plugins).\n\nThe thing where I needed to get used to:\n\n* Black always uses \"\", except when you would need escaping (e.g. 'He said: \"I told you so\"' will not be touched by black)\n* Black tries to make diffs minimal. In some cases, I don't like that so much. But I love having minimal diffs :-)"
+            ]
+          }
+        ]
+      },
+      "3_static_code_analysis_data": {
+        "total_complexity_score": 334,
+        "backend_code_score": null
+      }
+    }
+  ]
+}

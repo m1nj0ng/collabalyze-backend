@@ -1,0 +1,56 @@
+{
+  "project_name": "m1nj0ng/Gachiga",
+  "status": "success",
+  "total_contributors": 3,
+  "data": [
+    {
+      "username": "leesh0961",
+      "profile_image": "https://avatars.githubusercontent.com/u/80740680?v=4",
+      "1_quantitative_data": {
+        "commits": 14,
+        "pull_requests": 2,
+        "issues": 1,
+        "code_reviews": 5,
+        "loc_added": 7105,
+        "loc_deleted": 1664
+      },
+      "2_nlp_data": {
+        "commits": [
+          {
+            "message": "비로그인 결과 공유 추가",
+            "date": "2025-11-20 14:30:00"
+          },
+          {
+            "message": "투표화면에서 뒤로가기시 방으로 가게 수정",
+            "date": "2025-11-21 09:15:22"
+          }
+        ],
+        "pull_requests": [
+          {
+            "title": "목적지 추천 (투표) 기능 추가",
+            "body": "관련 이슈 #12 해결했습니다.",
+            "comments": [
+              "[hjy021225]: 코드 리뷰 남긴 내용입니다.",
+              "[Code Review - m1nj0ng]: 이 부분 로직 수정이 필요해 보입니다."
+            ],
+            "state": "closed",
+            "date": "2025-11-22 10:00:00"
+          }
+        ],
+        "issues": [
+          {
+            "title": "경로 색상 문제(모든 사용자 파란색) 해결 필요",
+            "body": "동시 확인 필요합니다.",
+            "comments": ["[leesh0961]: 제가 확인해보겠습니다."],
+            "state": "open",
+            "date": "2025-11-19 16:45:00"
+          }
+        ]
+      },
+      "3_static_code_analysis_data": {
+        "total_complexity_score": 1091.0,
+        "backend_code_score": null
+      }
+    }
+  ]
+}
