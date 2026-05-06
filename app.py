@@ -244,19 +244,21 @@ def register_project():
     })
 
 # ==========================================
-# 403 Rate Limit 방어 함수 추가
+# 403 Rate Limit 방어 함수
 # ==========================================
 def enforce_rate_limit(g):
     """현재 깃허브 API 잔여량을 확인하고, 한도 임박 시 대기하는 로직"""
-    core_limit = g.get_rate_limit().core
+    # g.get_rate_limit().core 대신, 마지막 API 호출 헤더에 남은 잔여량을 직접 가져옴
+    remaining, limit = g.rate_limiting
     
-    if core_limit.remaining < 50:
-        reset_timestamp = calendar.timegm(core_limit.reset.timetuple())
+    if remaining < 50:
+        # g.rate_limiting_resettime은 리셋 시간을 초(timestamp) 단위로 바로 뱉어줌
+        reset_timestamp = g.rate_limiting_resettime
         current_timestamp = time.time()
         sleep_time = max(0, reset_timestamp - current_timestamp) + 10
         
         if sleep_time > 0:
-            print(f"[경고] API 호출 한도 임박 (남은 횟수: {core_limit.remaining}). {int(sleep_time)}초 대기합니다.")
+            print(f"[경고] API 호출 한도 임박 (남은 횟수: {remaining}). {int(sleep_time)}초 대기합니다.")
             time.sleep(sleep_time)
             print("[안내] 대기 완료. 수집을 재개합니다.")
 
