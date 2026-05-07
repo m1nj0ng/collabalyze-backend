@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 import os
 import requests
 from dotenv import load_dotenv
@@ -14,9 +15,10 @@ import calendar
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app) # 모든 도메인에서 오는 요청 허용
 
 # ==========================================
-# Flask 기본 JSON 응답 설정 변경 (추가!)
+# Flask 기본 JSON 응답 설정 변경
 # ==========================================
 app.json.ensure_ascii = False  # 한글이 \uXXXX 로 깨지는 현상 방지
 app.json.compact = False       # 자동으로 들여쓰기(Pretty Print) 적용
