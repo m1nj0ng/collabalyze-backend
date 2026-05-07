@@ -16,6 +16,12 @@ load_dotenv()
 app = Flask(__name__)
 
 # ==========================================
+# Flask 기본 JSON 응답 설정 변경 (추가!)
+# ==========================================
+app.json.ensure_ascii = False  # 한글이 \uXXXX 로 깨지는 현상 방지
+app.json.compact = False       # 자동으로 들여쓰기(Pretty Print) 적용
+
+# ==========================================
 # 1. 데이터베이스 설정
 # ==========================================
 basedir = os.path.abspath(os.path.dirname(__file__))
